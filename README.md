@@ -4,6 +4,8 @@
  * Encrypt algorithm: DES, AES
  * Hash algorithm: MD2, MD5, SHA1, SHA256...
 
+# Usage
+
 ## Encrypt
 ```java
     String content = "Test content";
@@ -11,7 +13,7 @@
     String encrypted = EncryptUtil.encrypt(content, password);
 ```
 
-## Encrypt
+## Decrypt
 ```java
     String encrypted = "c73ba17d16f44b8c9e2232200aad11b81070740774d468892c79aca4ac96e5d3";
     String password = "password";
@@ -43,4 +45,4 @@
     System.out.println("md5 hash:" + EncryptUtil.md5(content));
     System.out.println("sha256 hash:" + EncryptUtil.digest(content, EncryptUtil.ALGORITHM.SHA256));
 ```
-<img src="./images/1.png" align="left" height="330" width="1126">
+<img src="./images/1.png" align="left" height="234" width="800">
