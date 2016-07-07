@@ -58,14 +58,35 @@ public class EncryptUtil {
         }
     }
 
+    /**
+     * encrypt content
+     * @param content content
+     * @param password password
+     * @return encrypted content
+     */
     public static String encrypt(final String content, final String password) {
         return encrypt(content, password, ALGORITHM.AES);
     }
 
+    /**
+     * encrypt content
+     * @param content content
+     * @param password password
+     * @param algorithm encrypt algorithm: AES, DES
+     * @return encrypted content
+     */
     public static String encrypt(final String content, final String password, final ALGORITHM algorithm) {
         return encrypt(content, password, null, algorithm);
     }
 
+     /**
+     * encrypt content
+     * @param content content
+     * @param password password
+     * @param iv initialization vector
+     * @param algorithm encrypt algorithm: AES, DES
+     * @return encrypted content
+     */
     public static String encrypt(final String content, final String password, final byte[] iv, final ALGORITHM algorithm) {
         try {
             final SecretKeySpec keySpec = generateKey(password, algorithm);
@@ -96,14 +117,35 @@ public class EncryptUtil {
         return null;
     }
 
+    /**
+     * decrypt content
+     * @param encryptedContent encrypted content
+     * @param password password
+     * @return decrypted content
+     */
     public static String decrypt(final String encryptedContent, final String password) {
         return decrypt(encryptedContent, password, ALGORITHM.AES);
     }
 
-    public static String decrypt(final String content, final String password, final ALGORITHM algorithm) {
-        return decrypt(content, password, null, algorithm);
+    /**
+     * decrypt content
+     * @param encryptedContent encrypted content
+     * @param password password
+     * @param algorithm decrypt algorithm: AES, DES
+     * @return decrypted content
+     */
+    public static String decrypt(final String encryptedContent, final String password, final ALGORITHM algorithm) {
+        return decrypt(encryptedContent, password, null, algorithm);
     }
 
+    /**
+     * decrypt content
+     * @param encryptedContent encrypted content
+     * @param password password
+     * @param iv initialization vector
+     * @param algorithm decrypt algorithm: AES, DES
+     * @return decrypted content
+     */
     public static String decrypt(final String encryptedContent, final String password, final byte[] iv, final ALGORITHM algorithm) {
         try {
             final SecretKeySpec keySpec = generateKey(password, algorithm);
@@ -163,26 +205,47 @@ public class EncryptUtil {
     }
 
     /**
-     * get the hash value of content
-     * @param content get the hash value using this content
+     * get the sha1 hash value of content
+     * @param content get the sha1 hash value using this content
      * @return the computed hash value
      */
     public static String sha1(String content) {
         return digest(content, ALGORITHM.SHA1);
     }
 
+    /**
+     * get the sha1 hash value of a file
+     * @param file get the sha1 hash value using this file
+     * @return the computed hash value
+     */
     public static String sha1(File file) {
         return digest(file, ALGORITHM.SHA1);
     }
 
+    /**
+     * get the md5 of content
+     * @param content get the md5 using this content
+     * @return the computed md5 hash value
+     */
     public static String md5(String content) {
         return digest(content, ALGORITHM.MD5);
     }
 
+    /**
+     * get the file md5
+     * @param file get the md5 using this file
+     * @return the computed md5 hash value
+     */
     public static String md5(File file) {
         return digest(file, ALGORITHM.MD5);
     }
 
+    /**
+     * get the hash value of content
+     * @param content get the hash value using this content
+     * @param algorithm hash algorithm
+     * @return the computed hash value
+     */
     public static String digest(String content, ALGORITHM algorithm) {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance(algorithm.toString());
@@ -197,6 +260,12 @@ public class EncryptUtil {
         return null;
     }
 
+    /**
+     * get the hash value of a file
+     * @param file get the hash value using this file
+     * @param algorithm hash algorithm
+     * @return the computed hash value
+     */
     public static String digest(File file, ALGORITHM algorithm) {
         DigestInputStream inputStream = null;
         try {
@@ -253,6 +322,10 @@ public class EncryptUtil {
         return bytes;
     }
 
+    /**
+     * for android platform compatibility
+     * @return is android platform
+     */
     private static boolean isAndroidPlatform() {
         Properties properties = System.getProperties();
         return properties.getProperty("java.vendor").contains("Android") ||
